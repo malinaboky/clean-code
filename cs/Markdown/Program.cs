@@ -1,3 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Markdown.Renderers;
+using Markdown.Tokenizers;
 
-Console.WriteLine("Hello, World!");
+namespace Markdown;
+
+public static class Program
+{
+    public static void Main()
+    {
+        var input = "Подчерки внутри текста c цифрами_12_3 ";
+        var md = Md.Create(new Tokenizer(), new HtmlTokenConverter()).Render(input);
+        Console.WriteLine(md);
+    }
+}

@@ -4,9 +4,24 @@ namespace Markdown.Tokens;
 
 public class LiteralToken : Token
 {
-    public override TagWrapper TagWrapper => TagWrapper.None;
-    public override string StartSeparator => "";
-    public override string EndSeparator => "";
-    public override bool HasSingleSeparator => false;
-    public override bool MayContainOtherTokens => true;
+    public override string TagWrapper => null;
+    public override bool IsTag => false;
+
+    public LiteralType ContentType { get; }
+
+    public LiteralToken(string content, LiteralType contentType) : base(content)
+    {
+        ContentType = contentType;
+    }
+
+    public LiteralToken(Token token) : base(token)
+    {
+        ContentType = LiteralType.Text;
+    }
+
+    public override bool Validate(List<Token> tokens, int index) => true;
+    
+    public override bool IsOpen(List<Token> tokens, int index) => true;
+
+    public bool IsNumber() => ContentType == LiteralType.Number;
 }

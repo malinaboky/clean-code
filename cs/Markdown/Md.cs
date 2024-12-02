@@ -14,7 +14,7 @@ public class Md
         this.tokenConverter = tokenConverter;
     }
 
-    public Md Create(ITokenizer tokenizer, ITokenConverter tokenConverter)
+    public static Md Create(ITokenizer tokenizer, ITokenConverter tokenConverter)
     {
         return new Md(tokenizer, tokenConverter);
     }
@@ -22,7 +22,6 @@ public class Md
     public string Render(string markdownStr)
     {
         var tokens = tokenizer.SplitToTokens(markdownStr);
-        var convertedStr = tokenConverter.ConvertTokens(tokens);
-        return convertedStr;
+        return tokenConverter.ConvertTokens(tokens);
     }
 }
